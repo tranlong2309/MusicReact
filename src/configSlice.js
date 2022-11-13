@@ -27,7 +27,6 @@ const configSlice = createSlice({
 		},
 		toggleShowLoginModal(state, action) {
 			state.isShowLoginModal = action.payload;
-			console.log(action.payload)
 		},
 	},
 });

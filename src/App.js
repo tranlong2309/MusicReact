@@ -13,7 +13,8 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { currentThemeSelector } from 'selectors/themeSelector';
 import { applyTheme } from 'utils/theme';
-
+import { getAll } from 'apiServices/theSong';
+import { getListMusic } from 'features/PlayMusic/listSongSlice';
 
 function App() {
 	const dispatch = useDispatch();
@@ -25,6 +26,11 @@ function App() {
 	}, [currentTheme]);
 
 	useEffect(() => {
+		const fetchSongs = async()=>{
+			const res= await getAll()
+			dispatch(getListMusic([res]))
+		}
+		fetchSongs();
 		dispatch(confirmFirstLoading());
 		// eslint-disable-next-line
 	}, []);

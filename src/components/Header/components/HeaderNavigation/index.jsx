@@ -1,27 +1,55 @@
 import { toggleShowThemeModal,toggleShowLoginModal } from 'configSlice';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import SettingMenu from './components/SettingMenu';
+import SettingProfile from './components/SettingMenu/settingprofile';
 import './HeaderNavigation.scss';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import {logOut } from 'apiServices/apiLogin'
+import {CreateAxios} from 'features/redux/createInstance'
+import { logOutSuccess } from 'features/redux/authSlice';
 function HeaderNavigation() {
 	const dispatch = useDispatch();
+    const navigate=useNavigate();
 	const [open, setOpen] = useState(false);
-
+	const [openSettingProfile, setOpenSettingProfile] = useState(false);
+	const user= useSelector((state)=> state.auth.login?.currentUser)
+	const isFetching= useSelector((state)=> state.auth.login?.isFetching)
+	let axiosJWT= CreateAxios(user,dispatch,logOutSuccess);
 	useEffect(() => {
 		const handleCloseSettingMenu = e => {
 			const settingMenu = e.target.closest('.setting__menu');
 			const navSettingBtn = e.target.closest('.btn--nav-setting');
+			const navSettingloginBtn = e.target.closest('.btn--nav-login');
 			if (!settingMenu && !navSettingBtn) {
 				setOpen(false);
+				
+			}
+			if(!settingMenu && !navSettingloginBtn){
+				setOpenSettingProfile(false)
 			}
 		};
 
 		document.addEventListener('click', handleCloseSettingMenu);
+		
 
 		return () => document.removeEventListener('click', handleCloseSettingMenu);
 	});
 
+	const toastLogin=()=>{
+		toast.success('Đăng xuất thành công!', {
+		  position:"top-right",
+		  autoClose: 5000,
+		  hideProgressBar: false,
+		  closeOnClick: true,
+		  pauseOnHover: true,
+		  draggable: true,
+		  progress: undefined,
+		  theme: "dark",
+		  });
+	}
 	const handleShowSettingMenu = () => {
 		setOpen(!open);
 	};
@@ -30,8 +58,20 @@ function HeaderNavigation() {
 		dispatch(toggleShowThemeModal(true));
 	};
 	const handleShowLoginModal = () => {
-		dispatch(toggleShowLoginModal(true));
+		if (!user){
+         dispatch(toggleShowLoginModal(true));
+		}else{
+			setOpenSettingProfile(!openSettingProfile);
+			
+		}
 	};
+	const handleLogout=async()=>{
+		const res=await logOut(dispatch,navigate,axiosJWT)
+		if (res?.success){
+			toastLogin()
+			setOpenSettingProfile(false);
+		}
+	  }
 	return (
 		<div>
 			<div className="header__nav">
@@ -156,8 +196,21 @@ function HeaderNavigation() {
 							<SettingMenu open={open} />
 						</div>
 					</li>
-					<li className="header__nav-item">
-						<img src="/assets/img/avatars/tenor.png" onClick={handleShowLoginModal} alt="" className="header__nav-btn" />
+					<li className="header__nav-item ">
+						<img src="/assets/img/avatars/tenor.png" onClick={handleShowLoginModal} alt="" className="header__nav-btn btn--nav-login" />
+						<SettingProfile handleLogout={handleLogout} open={openSettingProfile}/>
+						<ToastContainer
+							position="top-right"
+							autoClose={5000}
+							hideProgressBar={false}
+							newestOnTop={false}
+							closeOnClick
+							rtl={false}
+							pauseOnFocusLoss
+							draggable
+							pauseOnHover
+							theme="dark"
+							/>
 					</li>
 				</ul>
 			</div>

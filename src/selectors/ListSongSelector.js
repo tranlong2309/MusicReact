@@ -4,7 +4,6 @@ const selectListSong = state => state.listSong.list;
 const selectListDuration = state => state.listSong.listDuration;
 const selectPlaylistIndex = state => state.listSong.playlistIndex;
 const selectSongIndex = state => state.listSong.songIndex;
-
 export const currentListSongSelector = createSelector(
 	selectListSong,
 	selectPlaylistIndex,

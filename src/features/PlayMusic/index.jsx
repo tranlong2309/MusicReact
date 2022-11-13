@@ -2,14 +2,16 @@ import ContainerPlayMusicHeader from 'components/Container/components/ContainerP
 import SongSlide from 'features/SongSlide';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { currentListSongSelector } from 'selectors/ListSongSelector';
 import SongList from './components/SongList';
 import './PlayMusic.scss';
-
+import { getAll } from 'apiServices/theSong';
+import { getListSong } from './listSongSlice';
 function PlayMusic() {
 	const listSong = useSelector(currentListSongSelector);
-	console.log(listSong)
+	const [listNhac,setListNhac]=useState();
+	const dispatch= useDispatch();
 	const [device, setDevice] = useState(() => {
 		const windowWidth = window.innerWidth;
 		let device;
@@ -31,6 +33,12 @@ function PlayMusic() {
 			}
 			setDevice(device);
 		};
+		const fetchSongs = async()=>{
+			const res= await getAll()
+			setListNhac(res)
+		}
+
+		fetchSongs()
 
 		window.addEventListener('resize', handleDetectDevice);
 
@@ -46,11 +54,11 @@ function PlayMusic() {
 				<div className="container__playmusic">
 					{device !== 'mobile' && <SongSlide />}
 					<div className="container__playlist">
-						<SongList listSong={listSong} />
+						<SongList listSong={listNhac} />
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
 	);
 }
 

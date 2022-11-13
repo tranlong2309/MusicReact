@@ -28,7 +28,7 @@ function Playlist({ optionalClass = '', noWrap, sectionName = '', navigable = fa
 					duration: 3000,
 				})
 			);
-			return;
+			return;	
 		}
 		dispatch(changePlaylist(index - 1));
 		dispatch(toggleLoadingSlideAndSong(true));

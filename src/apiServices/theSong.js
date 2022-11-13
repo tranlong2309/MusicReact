@@ -2,7 +2,7 @@ import * as request from 'utils/request'
 
 export const getAll=async()=>{
     try {
-        const res = await request.get('TheSong');
+        const res = await request.get('TheSong/GetAll');
         return res
     } catch (error) {
         console.log(error)

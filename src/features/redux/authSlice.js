@@ -27,6 +27,18 @@ const authSlice=createSlice({
             state.login.isFetching=false;
             state.login.error=true;
         },
+        logOutStart:(state)=>{
+            state.login.isFetching=true ;
+        },
+        logOutSuccess:(state)=>{
+            state.login.isFetching=false;
+            state.login.currentUser=null;
+            state.login.terror=false;
+        },
+        logOutFailed:(state)=>{
+            state.login.isFetching=false;
+            state.login.error=true;
+        },
         registerStart:(state)=>{
             state.register.isFetching=true ;
         },
@@ -46,7 +58,12 @@ export const{
     loginStart,
     loginSuccess,
     loginFailed,
-    registerFailed,registerStart,registerSuccess
+    registerFailed,
+    registerStart,
+    registerSuccess,
+    logOutStart,
+    logOutSuccess,
+    logOutFailed
 }=authSlice.actions;
 
 export default authSlice.reducer;
