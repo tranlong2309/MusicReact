@@ -13,7 +13,11 @@ import TabPlaylist from './pages/PersonalPage/pages/TabPlaylist';
 import TabSong from './pages/PersonalPage/pages/TabSong';
 import TabUpload from './pages/PersonalPage/pages/TabUpload';
 import RadioPage from './pages/RadioPage';
-
+import AddSong from './pages/AddSong/addSong';
+import CreateSideBar from 'components/Sidebar/components/CreateSideBar/CreateSideBar';
+import AddArtist from 'features/Artist/components/AddArtist/AddArtist';
+import AddCategory from 'features/Category/AddCategory';
+import AddAlbum from 'features/Album/components/AddAlbum/AddAlbum';
 function Container() {
 	return (
 		<Routes>
@@ -25,11 +29,17 @@ function Container() {
 				<Route path="mvs" element={<TabMv />} />
 				<Route path="artists" element={<TabArtist />} />
 				<Route path="upload" element={<TabUpload />} />
+				<Route path='addsong' element={<AddSong/>} />
 			</Route>
 			<Route path="/" element={<ExplorePage />} />
 			<Route path="zingChart" element={<ChartPage />} />
 			<Route path="radio" element={<RadioPage />} />
 			<Route path="follow" element={<FollowPage />} />
+			<Route path='addsong' element={<AddSong/>} />
+			<Route path='addplaylist' element={<CreateSideBar/>}/>
+			<Route path='addartist' element={<AddArtist/>} />
+			<Route path='addcategory' element={<AddCategory/>} />
+			<Route path='addalbum' element={<AddAlbum/>} />
 		</Routes>
 	);
 }

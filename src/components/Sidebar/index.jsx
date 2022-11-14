@@ -1,6 +1,9 @@
 import clsx from 'clsx';
+import AddSong from 'components/Container/pages/AddSong/addSong';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
+import CreateSideBar from './components/CreateSideBar/CreateSideBar';
 import SidebarSubNavigation from './components/SidbarSubNavigation';
 import SidebarNavigation from './components/SidebarNavigation';
 import './Sidebar.scss';
@@ -13,7 +16,6 @@ function Sidebar() {
 	const handleExpandSidebar = () => {
 		setExpandSidebar(true);
 	};
-
 	const handleShrinkSidebar = e => {
 		const appSidebar = e.target.closest('.app__sidebar');
 		if (appSidebar) return;
@@ -42,8 +44,8 @@ function Sidebar() {
 
 			<div className="sidebar__create-playlist">
 				<div className="sidebar__create-container hide-on-tablet-mobile">
-					<i className="bi bi-plus-lg"></i>
-					<h2 className="sidebar__create-title">Tạo playlist mới</h2>
+					<i className="bi bi-plus-lg" ></i>
+					<h2 className="sidebar__create-title">Tạo playlist mới </h2>
 				</div>
 				<div className="sidebar__expand">
 					<div className="sidebar__expand-btn btn--expand" onClick={handleExpandSidebar}>
