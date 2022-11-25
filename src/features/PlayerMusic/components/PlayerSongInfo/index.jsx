@@ -34,7 +34,6 @@ function PlayerSongInfo({ currentSong = {}, isPopupSection }) {
 			titleAnimate?.play();
 		}
 	}, [isPlaying, titleAnimate]);
-
 	return (
 		<div
 			className={clsx('player__container-song', {

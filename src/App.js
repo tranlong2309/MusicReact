@@ -15,6 +15,8 @@ import { currentThemeSelector } from 'selectors/themeSelector';
 import { applyTheme } from 'utils/theme';
 import { getAll } from 'apiServices/theSong';
 import { getListMusic } from 'features/PlayMusic/listSongSlice';
+import { getallSinger } from 'apiServices/apiSinger';
+import { getAllSinger } from 'features/Artist/personalArtistSlice';
 
 function App() {
 	const dispatch = useDispatch();
@@ -30,7 +32,12 @@ function App() {
 			const res= await getAll()
 			dispatch(getListMusic([res]))
 		}
+		const fetchSinger= async()=>{
+			const res= await getallSinger()
+			dispatch(getAllSinger(res))
+		}
 		fetchSongs();
+		fetchSinger();
 		dispatch(confirmFirstLoading());
 		// eslint-disable-next-line
 	}, []);

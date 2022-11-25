@@ -1,3 +1,4 @@
+import { UpdateListen } from 'apiServices/theSong';
 import clsx from 'clsx';
 import HeartButton from 'components/IconButton/HeartButton';
 import MicroButton from 'components/IconButton/MicroButton';
@@ -8,7 +9,7 @@ import './SongItem.scss';
 
 function SongItem({ song = [], index = 0, duration, onClick, prevPlaylist, isSongTab }) {
 	const isPlaying = useSelector(state => state.music.isPlaying);
-	const { name, singers, image } = song;
+	const { id,name, singers, image } = song;
 	const [checked, setChecked] = useState(false);
 	const { songIndex: currentIndex, playlistIndex } = useSelector(state => state.listSong);
 	const { firstLoading } = useSelector(state => state.config);
@@ -17,7 +18,10 @@ function SongItem({ song = [], index = 0, duration, onClick, prevPlaylist, isSon
 	const handleClickSong = e => {
 		const checkNode = e.target.closest('.playlist__song-check');
 		const optionNode = e.target.closest('.playlist__song-option');
-
+		const ListenAPI= async()=>{
+			const res= UpdateListen(id);
+		}
+		ListenAPI();
 		if (index === currentIndex || optionNode || checkNode) return;
 		if (onClick) onClick(index);
 	};

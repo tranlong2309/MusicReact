@@ -1,8 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import songApi from 'api/SongApi';
-import { getAll } from 'apiServices/theSong';
-import { DURATION_STORAGE_KEY, MUSIC_STORAGE_KEY, PLAYER_STORAGE_KEY } from 'constants/index';
-import { useState,useEffect } from 'react';
+import { DURATION_STORAGE_KEY, PLAYER_STORAGE_KEY } from 'constants/index';
 
 var listSong = [
 

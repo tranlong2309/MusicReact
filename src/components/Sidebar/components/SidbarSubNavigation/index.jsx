@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { NavLink } from 'react-router-dom';
 import React, { useEffect, useRef, useState } from 'react';
 import './SidebarSubNavigation.scss';
 
@@ -31,10 +32,10 @@ function SidebarSubNavigation() {
 					</a>
 				</li>
 				<li className="sidebar__nav-item subnab--item">
-					<a href="/" className="sidebar__item-link">
+					<NavLink to="category"  className="sidebar__item-link">
 						<i className="bi bi-slack"></i>
 						<span>Thể Loại</span>
-					</a>
+					</NavLink>
 				</li>
 				<li className="sidebar__nav-item subnab--item">
 					<a href="/" className="sidebar__item-link">

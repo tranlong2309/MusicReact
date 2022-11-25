@@ -4,11 +4,15 @@ import { ARTIST_STORAGE_KEY } from 'constants/index';
 const personalArtistSlice = createSlice({
 	name: 'personalArtist',
 	initialState: {
-		list: JSON.parse(localStorage.getItem(ARTIST_STORAGE_KEY)) || [],
+		list:[],
 	},
-	reducers: {},
+	reducers: {
+		getAllSinger(state,action){
+			state.list=action.payload
+		}
+	},
 });
 
-const { reducer } = personalArtistSlice;
-
+const {actions: { getAllSinger}, reducer } = personalArtistSlice;
+export { getAllSinger };
 export default reducer;

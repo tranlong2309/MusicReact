@@ -1,10 +1,22 @@
 import clsx from 'clsx';
 import React from 'react';
-
-function SongRankingItem({ song = {} }) {
-	const { image, name, singers, rank, time } = song;
+import { UpdateListen } from 'apiServices/theSong';
+import { useSelector } from 'react-redux';
+function SongRankingItem({  onClick,song = {} }) {
+	const { id,image, name, singers, rank, time,index } = song;
+	const { songIndex: currentIndex, playlistIndex } = useSelector(state => state.listSong);
+	const handleClickSong = e => {
+		const checkNode = e.target.closest('.playlist__song-check');
+		const optionNode = e.target.closest('.playlist__song-option');
+		const ListenAPI= async()=>{
+			const res= UpdateListen(id);
+		}
+		ListenAPI();
+		if (index === currentIndex || optionNode || checkNode) return;
+		if (onClick) onClick(index);
+	};
 	return (
-		<div className="playlist__list-song media">
+		<div onClick={handleClickSong} className="playlist__list-song media">
 			<div className="playlist__song-info media__left">
 				<div className="playlist__song-rank">
 					<div

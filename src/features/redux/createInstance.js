@@ -11,7 +11,6 @@ export const CreateAxios =(user,dispatch,stateSuccess)=>{
 			let date =new Date()
 			const decoedToken= jwtDecode(user?.jwtToken);
 			if(decoedToken.exp < date.getTime()/1000 ){
-				console.log(user)
 				const data= await refreshToken({ refreshToken:user?.refreshToken});
 				const refreshUser={
 					...user,

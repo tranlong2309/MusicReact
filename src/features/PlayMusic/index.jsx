@@ -7,10 +7,9 @@ import { currentListSongSelector } from 'selectors/ListSongSelector';
 import SongList from './components/SongList';
 import './PlayMusic.scss';
 import { getAll } from 'apiServices/theSong';
-import { getListSong } from './listSongSlice';
+import { getListMusic } from 'features/PlayMusic/listSongSlice';
 function PlayMusic() {
 	const listSong = useSelector(currentListSongSelector);
-	const [listNhac,setListNhac]=useState();
 	const dispatch= useDispatch();
 	const [device, setDevice] = useState(() => {
 		const windowWidth = window.innerWidth;
@@ -35,10 +34,9 @@ function PlayMusic() {
 		};
 		const fetchSongs = async()=>{
 			const res= await getAll()
-			setListNhac(res)
+			dispatch(getListMusic([res]))
 		}
-
-		fetchSongs()
+		fetchSongs();
 
 		window.addEventListener('resize', handleDetectDevice);
 
@@ -54,7 +52,7 @@ function PlayMusic() {
 				<div className="container__playmusic">
 					{device !== 'mobile' && <SongSlide />}
 					<div className="container__playlist">
-						<SongList listSong={listNhac} />
+						<SongList listSong={listSong} />
 					</div>
 				</div>
 			</div>

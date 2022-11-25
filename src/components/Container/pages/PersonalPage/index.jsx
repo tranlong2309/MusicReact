@@ -10,7 +10,6 @@ function PersonalPage() {
 	const navigate=useNavigate();
 	const containerRef = useRef();
 	const user= useSelector((state)=> state.auth.login?.currentUser)
-	console.log(user)
 	useEffect(() => {
 		if(!user){
 			navigate("/")

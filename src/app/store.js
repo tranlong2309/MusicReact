@@ -32,7 +32,7 @@ const persistConfig = {
 	key: 'root',
 	version: 1,
 	storage,
-	whitelist:["auth"],
+	whitelist:["auth","listSong"],
   }
 const rootReducerAuth= combineReducers({listSong: songReducer,
 	music: musicReducer,
@@ -48,7 +48,8 @@ const rootReducerAuth= combineReducers({listSong: songReducer,
 	theme: themeReducer,
 	toast: toastReducer,
 	config: configReducer,
-	auth:authReducer,})
+	auth:authReducer,
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducerAuth)
 const rootReducer = {

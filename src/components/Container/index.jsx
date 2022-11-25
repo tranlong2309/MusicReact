@@ -18,6 +18,7 @@ import CreateSideBar from 'components/Sidebar/components/CreateSideBar/CreateSid
 import AddArtist from 'features/Artist/components/AddArtist/AddArtist';
 import AddCategory from 'features/Category/AddCategory';
 import AddAlbum from 'features/Album/components/AddAlbum/AddAlbum';
+import CategoryPage from './pages/Category';
 function Container() {
 	return (
 		<Routes>
@@ -40,6 +41,7 @@ function Container() {
 			<Route path='addartist' element={<AddArtist/>} />
 			<Route path='addcategory' element={<AddCategory/>} />
 			<Route path='addalbum' element={<AddAlbum/>} />
+			<Route path='category' element={<CategoryPage/>} />
 		</Routes>
 	);
 }

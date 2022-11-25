@@ -8,7 +8,6 @@ import { currentSongSelector } from 'selectors/ListSongSelector';
 
 function PlayerMusic() {
 	const currentSong = useSelector(currentSongSelector);
-
 	return (
 		<div className="player__container">
 			<PlayerSongInfo currentSong={currentSong} />
