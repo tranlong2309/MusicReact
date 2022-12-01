@@ -1,21 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {CreateAxios} from 'features/redux/createInstance'
 import { loginSuccess } from 'features/redux/authSlice';
 import { useDispatch,useSelector } from 'react-redux';
 import { CreateSinger } from "apiServices/apiSinger";
 import ToastMessger from "features/ToastMessger";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 // import "./addSong.scss";
 function AddArtist() {
   const [nameSinger,setNameSinger]=useState("")
   const [fileImage,setFileImage]=useState()
   const [disabled,setDisabled]=useState(false)
   const ref=useRef()
+  const navigate=useNavigate();
   const dispatch = useDispatch();
   const user= useSelector((state)=> state.auth.login?.currentUser)
   let axiosJWT= CreateAxios(user,dispatch,loginSuccess);
   let formData = new FormData();
-
+  useEffect(()=>{
+    if(user?.userInfor?.role!=0){
+			navigate("/")
+		}
+  },[])
 const handleCreateSinger=async(e)=>{
   e.preventDefault();
   setDisabled(true)

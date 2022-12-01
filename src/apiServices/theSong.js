@@ -1,9 +1,13 @@
 import axios from 'axios';
 import * as request from 'utils/request'
 
-export const getAll=async()=>{
+export const getAll=async(id)=>{
     try {
-        const res = await request.get('TheSong/GetAll');
+        const res = await request.get('TheSong/GetAll',{
+            params:{
+                id
+            }
+        });
         return res
     } catch (error) {
         console.log(error)
@@ -125,4 +129,25 @@ export const getSongRankAPI=async()=>{
     } catch (error) {
         console.log(error)
     }
+}
+export const UploadMusic=async(formData,axiosJWT)=>{
+    try {
+        const res = await axiosJWT.post('https://localhost:44348/TheSong/create-upload',formData,{ headers: { 'content-type': 'multipart/form-data' }})
+        return res
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
+}
+
+export const getMusicListener=async(id,axiosJWT)=>{
+    try {
+        const res = await axiosJWT.get('https://localhost:44348/TheSong/get-music-listener?id='+id)
+        return res.data
+        }
+        catch(error)
+        {
+            console.log(error)
+        }
 }

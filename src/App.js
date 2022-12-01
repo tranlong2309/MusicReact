@@ -36,7 +36,7 @@ function App() {
 			const res= await getallSinger()
 			dispatch(getAllSinger(res))
 		}
-		fetchSongs();
+		//fetchSongs();
 		fetchSinger();
 		dispatch(confirmFirstLoading());
 		// eslint-disable-next-line

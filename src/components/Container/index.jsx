@@ -19,6 +19,7 @@ import AddArtist from 'features/Artist/components/AddArtist/AddArtist';
 import AddCategory from 'features/Category/AddCategory';
 import AddAlbum from 'features/Album/components/AddAlbum/AddAlbum';
 import CategoryPage from './pages/Category';
+import MusicNew from './pages/MusicNew';
 function Container() {
 	return (
 		<Routes>
@@ -34,6 +35,7 @@ function Container() {
 			</Route>
 			<Route path="/" element={<ExplorePage />} />
 			<Route path="zingChart" element={<ChartPage />} />
+			<Route path="songnew" element={<MusicNew />} />
 			<Route path="radio" element={<RadioPage />} />
 			<Route path="follow" element={<FollowPage />} />
 			<Route path='addsong' element={<AddSong/>} />

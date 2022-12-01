@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './SettingNavigation.scss';
 import { NavLink,useNavigate } from 'react-router-dom';
-
+import { useDispatch, useSelector } from 'react-redux';
 function SettingProfileNav({handleLogout}) {
+  const user= useSelector((state)=> state.auth.login?.currentUser)
+ 
   return (
     <div className="setting__nav">
       <div className="setting__item">
@@ -13,6 +15,7 @@ function SettingProfileNav({handleLogout}) {
         </div>
         </NavLink>
       </div>
+     {user?.userInfor?.role==0 && <div>
       <div className="setting__item">
       <NavLink to="addsong">
         <div className="setting__item-content">
@@ -53,6 +56,7 @@ function SettingProfileNav({handleLogout}) {
         </div>
         </NavLink>
       </div>
+      </div>}
       <div className="setting__item">
         <div className="setting__item-content">
           <i className="bi bi-box-arrow-right setting__item-icon"></i>

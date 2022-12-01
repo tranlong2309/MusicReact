@@ -19,11 +19,15 @@ const listSongSlice = createSlice({
 		songIndex: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY))?.songIndex ?? 0,
 		playlistIndex: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY))?.playlistIndex ?? 0,
 		list:listSong ,
+		ListMusicListener:[] ,
 		listDuration: JSON.parse(localStorage.getItem(DURATION_STORAGE_KEY)) || [],
 	},
 	reducers: {
 		getListMusic(state,action){
 			state.list=action.payload
+		},
+		getListMusicListener(state,action){
+			state.list[0]=state.list[0].concat(action.payload)
 		},
 		nextSong(state, action) {
 			const newSongIndex = action.payload;
@@ -34,14 +38,15 @@ const listSongSlice = createSlice({
 			state.songIndex = 0;
 			state.playlistIndex = action.payload;
 		},
+		
 	},
 });
 
 const {
-	actions: { nextSong, changePlaylist, getListMusic},
+	actions: { nextSong, changePlaylist, getListMusic,getListMusicListener},
 	reducer,
 } = listSongSlice;
 
-export { nextSong, changePlaylist,getListMusic };
+export { nextSong, changePlaylist,getListMusic,getListMusicListener};
 
 export default reducer;

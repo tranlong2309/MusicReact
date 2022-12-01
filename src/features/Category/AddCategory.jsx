@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { loginSuccess } from 'features/redux/authSlice';
 import { useDispatch,useSelector } from 'react-redux';
 import {CreateAxios} from 'features/redux/createInstance'
@@ -6,17 +6,25 @@ import { useState } from "react";
 import { CreateCategory } from "apiServices/theSong";
 import  ToastMessger  from "features/ToastMessger";
 import { useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
 // import "./addSong.scss";
 function AddCategory() {
 const [nameCategory,setNameCategory]=useState("")
 const [file,setFile]=useState();
 const [disabled,setDisabled]=useState(false)
 const refFile=useRef();
+const navigate=useNavigate();
 const dispatch = useDispatch();
 const user= useSelector((state)=> state.auth.login?.currentUser)
 let axiosJWT= CreateAxios(user,dispatch,loginSuccess);
 let formData = new FormData();
+
+useEffect(()=>{
+    
+   if(user?.userInfor?.role!=0){
+    navigate("/")
+  }
+},[])
 const handelCreateCategory= async(e)=>{
   e.preventDefault();
   setDisabled(true)

@@ -8,6 +8,7 @@ import {CreateAxios} from 'features/redux/createInstance'
 import  ToastMessger  from "features/ToastMessger";
 import { useRef } from "react";
 import "./addSong.scss";
+import { useNavigate } from "react-router-dom";
 function AddSong() {
   const[category,setCategory]=useState([]);
   const[ablum,setAlbum]=useState([]);
@@ -20,10 +21,15 @@ function AddSong() {
   const refFileMusic= useRef();
   const refFileImg= useRef();
   const dispatch = useDispatch();
+  const navigate=useNavigate();
   const user= useSelector((state)=> state.auth.login?.currentUser)
   let axiosJWT= CreateAxios(user,dispatch,loginSuccess);
   let formData = new FormData();
   useEffect(()=>{
+
+    if(user?.userInfor?.role!=0){
+			navigate("/")
+		}
     const fechAPICategory=async()=>{
       const res= await getCategory();
       setCategory(res)
@@ -81,14 +87,10 @@ function AddSong() {
         <span></span>
       </div>
       <div className="txt_field1">
+      <label htmlFor="#">Chọn thể loại</label>
         <select onChange={(e)=> setIdCategory(e.target.value)}>
         {category.map((item,index)=>
           ( <option value={item.id}>{item.nameCategory}</option>) 
-          )}
-        </select>
-        <select onChange={(e)=> setIdAlbum(e.target.value)}>
-        {ablum.map((item,index)=>
-          ( <option value={item.id}>{item.nameAlbum}</option>) 
           )}
         </select>
       </div>

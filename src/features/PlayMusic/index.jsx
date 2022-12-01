@@ -1,5 +1,7 @@
 import ContainerPlayMusicHeader from 'components/Container/components/ContainerPlayMusicHeader';
 import SongSlide from 'features/SongSlide';
+import { loginSuccess } from 'features/redux/authSlice';
+import {CreateAxios} from 'features/redux/createInstance'
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +13,8 @@ import { getListMusic } from 'features/PlayMusic/listSongSlice';
 function PlayMusic() {
 	const listSong = useSelector(currentListSongSelector);
 	const dispatch= useDispatch();
+	const user= useSelector((state)=> state.auth.login?.currentUser)
+	let axiosJWT= CreateAxios(user,dispatch,loginSuccess);
 	const [device, setDevice] = useState(() => {
 		const windowWidth = window.innerWidth;
 		let device;
@@ -20,7 +24,6 @@ function PlayMusic() {
 
 		return device;
 	});
-
 	useEffect(() => {
 		const handleDetectDevice = e => {
 			const windowWidth = e.target.innerWidth;
@@ -32,16 +35,20 @@ function PlayMusic() {
 			}
 			setDevice(device);
 		};
-		const fetchSongs = async()=>{
-			const res= await getAll()
-			dispatch(getListMusic([res]))
-		}
-		fetchSongs();
+	
+
 
 		window.addEventListener('resize', handleDetectDevice);
 
 		return () => window.removeEventListener('resize', handleDetectDevice);
 	}, []);
+	useEffect(()=>{
+		const fetchSongs = async()=>{
+			const res= await getAll(user!=null ? user.userInfor.idListener : 0)
+			dispatch(getListMusic([res]))
+		}
+		fetchSongs();
+	},[listSong])
 
 	return (
 		<div className="container__control row">

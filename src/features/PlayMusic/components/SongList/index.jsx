@@ -1,19 +1,19 @@
 import { toggleLoadingSong } from 'features/PlayerMusic/musicSlice';
-import { nextSong } from 'features/PlayMusic/listSongSlice';
-import React, { useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { loginSuccess } from 'features/redux/authSlice';
+import { useDispatch,useSelector } from 'react-redux';
+import {CreateAxios} from 'features/redux/createInstance'
+import { getListMusicListener, nextSong } from 'features/PlayMusic/listSongSlice';
+import React, { useEffect, useRef, useState } from 'react';
 import { currentListDuration } from 'selectors/ListSongSelector';
 import SongItem from '../SongItem';
 import './SongList.scss';
+import { getMusicListener } from 'apiServices/theSong';
 
-
-import axios from 'axios';
-import jwtDecode from 'jwt-decode';
-import { loginSuccess } from 'features/redux/authSlice';
 const SongList=({ listSong = [], isSongTab = false })=> {
 	const dispatch = useDispatch();
 	const listDuration = useSelector(currentListDuration);
 	const prevPlaylist = useRef();
+
 	const handleClickSong = index => {
 		dispatch(toggleLoadingSong(true));
 		dispatch(nextSong(index));

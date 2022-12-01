@@ -26,10 +26,10 @@ function SidebarSubNavigation() {
 		>
 			<ul className="sidebar__nav-list">
 				<li className="sidebar__nav-item subnab--item">
-					<a href="/" className="sidebar__item-link">
-						<i className="bi bi-music-note-beamed"></i>
+				<NavLink to="songnew"  className="sidebar__item-link">
+				<i className="bi bi-music-note-beamed"></i>
 						<span>Nhạc Mới</span>
-					</a>
+			    </NavLink>
 				</li>
 				<li className="sidebar__nav-item subnab--item">
 					<NavLink to="category"  className="sidebar__item-link">
